@@ -50,3 +50,27 @@ int main() {
     // Remove newline character from message
     message[strcspn(message, "\n")] = 0;
 
+    // Step 4: Send message
+    sent_bytes = send(sockfd, message, strlen(message), 0);
+    if (sent_bytes < 0) {
+        perror("Send failed");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+    printf("Message sent: %s\n", message);
+
+    // Step 5: Receive and print response
+    received_bytes = recv(sockfd, response, sizeof(response) - 1, 0);
+    if (received_bytes < 0) {
+        perror("Receive failed");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    response[received_bytes] = '\0';
+    printf("Response from server: %s\n", response);
+
+    // Clean up
+    close(sockfd);
+    return 0;
+}
