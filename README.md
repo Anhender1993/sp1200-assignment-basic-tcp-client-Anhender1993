@@ -1,90 +1,93 @@
-# Assignment: Basic TCP Client
+# Basic TCP Client in C
 
-## Introduction
+> A lightweight TCP client written in C that connects to a Docker-hosted server, sends messages, and receives responses.  
+> This project demonstrates the fundamentals of socket programming and reliable two-way communication over TCP.
 
-In this assignment, you will develop a basic TCP client application in C that connects to a provided Docker server, sends messages, and handles responses. This assignment will help you understand socket programming, TCP connections, and basic client-server communication.
+## Project Description
 
-## Starter Files
+This project implements a simple TCP client that establishes a connection to a server running inside a Docker container.  
+The client allows the user to type a message, send it to the server, and then display the server’s response.  
 
-Create a new file named `tcp_client.c`.
+It was developed as part of my Systems Programming coursework to gain practical experience with:
+- Socket creation and management (`socket()`, `connect()`, `send()`, `recv()`)
+- IP addressing and `sockaddr_in` structures
+- Basic error handling and graceful termination
 
-## Requirements
+## Tech Stack
+- **Language:** C (GCC 13+)
+- **Environment:** Linux / VS Code Dev Container
+- **Libraries:**  
+  - `<stdio.h>` — input/output  
+  - `<string.h>` — buffer operations  
+  - `<sys/socket.h>` — core socket functions  
+  - `<arpa/inet.h>` — IP address conversion  
+  - `<unistd.h>` — socket cleanup
 
-- **Create a TCP Client**: Implement a TCP client that connects to a server running inside a Docker container.  
-- **Send Messages**: The client should be able to send a message to the server.  
-- **Receive and Handle Responses**: The client should be able to receive responses from the server and print them.  
-- **Error Handling**: Implement basic error handling to manage connection failures and data transmission issues.
 
-## Steps to Complete the Assignment
+## File Structure
+.devcontainer  |  # Dev container configuration for VS Code
+.github        |  # GitHub automation/workflow files
+tcp_client.c   |  # Main client implementation
+README.md      |  # Project documentation
 
-**Step 1: Create a Socket**  
-Implement the code to create a TCP socket using `socket()`.
+## Setup & Compilation
 
-**Step 2: Configure Server Address**  
-Set up the server address structure with the server’s IP and port number.
+### Prerequisites
+- VS Code with the **Dev Containers** extension  
+- Docker installed and running  
+- GCC or Clang compiler available inside the container  
+- A TCP server (Docker-based or standalone) listening on the chosen port  
 
-**Step 3: Connect to the Server**  
-Use `connect()` to establish a connection with the server.
+### Build
+```bash
+gcc tcp_client.c -o tcp_client
+```
+### Run
+```bash
+./tcp_client
+```
+You can then type a message (e.g., “Hello, Server!”) and receive the server’s reply.
 
-**Step 4: Send a Message**  
-Implement the functionality to send a message to the server using `send()`.
+### Program Workflow
+	1.	Create a socket using socket(AF_INET, SOCK_STREAM, 0).
+	2.	Define the server address and port with sockaddr_in.
+	3.	Connect to the server using connect().
+	4.	Send data via send().
+	5.	Receive and print the server’s response via recv().
+	6.	Close the socket with close() after communication completes.
 
-**Step 5: Receive and Print Response**  
-Implement the code to receive a response from the server using `recv()` and print it.
 
-**Step 6: Error Handling**  
-Add error handling to manage socket creation failures, connection issues, and data transmission problems.
+### Example Output
 
-## Sample Input and Output
-
-For the following input: # Assignment: Basic TCP Client
-
-## Introduction
-
-In this assignment, you will develop a basic TCP client application in C that connects to a provided Docker server, sends messages, and handles responses. This assignment will help you understand socket programming, TCP connections, and basic client-server communication.
-
-## Starter Files
-
-Create a new file named `tcp_client.c`.
-
-## Requirements
-
-- **Create a TCP Client**: Implement a TCP client that connects to a server running inside a Docker container.  
-- **Send Messages**: The client should be able to send a message to the server.  
-- **Receive and Handle Responses**: The client should be able to receive responses from the server and print them.  
-- **Error Handling**: Implement basic error handling to manage connection failures and data transmission issues.
-
-## Steps to Complete the Assignment
-
-**Step 1: Create a Socket**  
-Implement the code to create a TCP socket using `socket()`.
-
-**Step 2: Configure Server Address**  
-Set up the server address structure with the server’s IP and port number.
-
-**Step 3: Connect to the Server**  
-Use `connect()` to establish a connection with the server.
-
-**Step 4: Send a Message**  
-Implement the functionality to send a message to the server using `send()`.
-
-**Step 5: Receive and Print Response**  
-Implement the code to receive a response from the server using `recv()` and print it.
-
-**Step 6: Error Handling**  
-Add error handling to manage socket creation failures, connection issues, and data transmission problems.
-
-## Sample Input and Output
-
-For the following input: Hello, Server!
-
-We should expect the following output: Message sent: Hello, Server!
+Input:
+```bash
+Hello, Server!
+```
+Output:
+```bash
+Message sent: Hello, Server!
 Response from server: Hello, Client!
+```
 
-## Conclusion
+### Error Handling
 
-In this assignment, you developed a basic TCP client application capable of connecting to a server, sending messages, and handling responses. This assignment demonstrates the fundamentals of socket programming and TCP communication, which are crucial for networked applications.
+The client validates every step of the connection process:
+	•	Socket creation failure
+	•	Invalid IP or port configuration
+	•	Failed connection attempts
+	•	Transmission and reception errors
 
-Make sure to test your client with the provided Docker server to ensure it functions correctly. If you encounter any issues, review your code for errors or consult documentation for further guidance.
+Each error prints a descriptive message to the terminal for easier debugging.
 
-**Note:** Ensure that the Docker server is running and listening on the specified IP and port before you execute your client program.
+### Lessons Learned
+	•	Gained experience with socket programming fundamentals.
+	•	Understood TCP’s reliable communication model.
+	•	Learned to test and debug networking code inside containerized environments.
+	•	Improved confidence in managing low-level I/O operations in C.
+
+### Author
+
+Andrew Henderson
+	•	GitHub: Anhender1993￼
+	•	Portfolio: GitHub.com/Anhender1993
+	•	LinkedIn: linkedin.com/in/andrew-v-henderson
