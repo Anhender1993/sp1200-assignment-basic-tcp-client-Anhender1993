@@ -3,6 +3,17 @@
 > A lightweight TCP client written in C that connects to a Docker-hosted server, sends messages, and receives responses.  
 > This project demonstrates the fundamentals of socket programming and reliable two-way communication over TCP.
 
+## Table of Contents
+- [Project Description](#project-description)
+- [Directory Structure](#directory-structure)
+- [Tech Stack](#tech-stack)
+- [Installation & Setup](#installation--setup)
+- [Program Workflow](#program-workflow)
+- [Example Run](#example-run)
+- [Error Handling](#error-handling)
+- [Lessons Learned](#lessons-learned)
+- [Author](#author)
+
 ## Project Description
 
 This project implements a simple TCP client that establishes a connection to a server running inside a Docker container.  
